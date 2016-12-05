@@ -16,8 +16,8 @@ Plan v0.0.1:
     - Users can change the report to aggregate spending per hour, day,month, and year (in addition to per week)
     
   DB:
-    Tables: Users, Expenses, Reports (if we want to save all generated reports to eliminate duplicate queries)
-    Relationships: Users to Expenses (One to Many)
+    - Tables: Users, Expenses, Reports (if we want to save all generated reports to eliminate duplicate queries)
+    - Relationships: Users to Expenses (One to Many)
     
     User Columns:
       - ID(primary key): Integer Auto Increment

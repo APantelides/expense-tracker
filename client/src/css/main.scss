@@ -1,0 +1,10 @@
+$awesome-blue: #2196F3;
+
+h1 {
+  padding: 10px 15px;
+  background-color: $awesome-blue;
+}
+
+h1:hover {
+  background-color: darken($awesome-blue,10%);
+}
