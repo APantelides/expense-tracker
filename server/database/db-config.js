@@ -1,4 +1,17 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('postgres://system:password@127.0.0.1:5432/expense-tracker');
+const {dbInfo} = require('../resources/config/keys');
 
-module.exports = {db};
+//connect to postgres using Sequelize
+var db = new Sequelize(dbInfo);
+
+//overwrite existing database... remove once we are going to start testing front end!
+db.sync({force: true});
+
+//build the tables
+const {user} = require('./schemas/user.js')(db, Sequelize);
+const {expense} = require('./schemas/expense.js')(db, Sequelize);
+
+//define relationships here if needed
+
+
+module.exports = {db, user, expense};
