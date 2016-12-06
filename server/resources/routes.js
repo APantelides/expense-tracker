@@ -1,4 +1,5 @@
 const path = require('path');
+const controller = require('../database/controllers.js');
 
 module.exports = (app, express) => {
 
