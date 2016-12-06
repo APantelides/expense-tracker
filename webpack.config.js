@@ -3,7 +3,7 @@ module.exports = {
 
   output: {
     path: 'client/public/build',
-    publicPath: 'build',
+    //publicPath: 'build', had to disable for hot module replacement
     filename: 'bundle.js'
   },
 

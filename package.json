@@ -4,7 +4,7 @@
   "description": "An expense tracker practical project for Gigster",
   "main": "client/src/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p --config webpack.build.config.js",
     "start": "webpack-dev-server --progress --inline --hot --history-api-fallback --content-base client/public/build"
   },
   "repository": {
