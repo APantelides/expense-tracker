@@ -13,7 +13,8 @@ class CreateExpensePage extends React.Component {
     this.state = {
       expense: {
         price: '',
-        description: ''
+        description: '',
+        date: ''
       }
     };
 
@@ -29,7 +30,8 @@ class CreateExpensePage extends React.Component {
     const price = encodeURIComponent(this.state.expense.price);
     const description = encodeURIComponent(this.state.expense.description);
     const userId = encodeURIComponent(UserId.getId());
-    const formData = `userId=${userId}&price=${price}&description=${description}`;
+    const date = encodeURIComponent(this.state.expense.date);
+    const formData = `userId=${userId}&price=${price}&description=${description}&date=${date}`;
 
     //create a fetch request
     fetch('/api/expense', {

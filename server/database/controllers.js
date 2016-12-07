@@ -22,6 +22,7 @@ module.exports = {
       Expense.create({
         price: req.body.price,
         description: req.body.description,
+        date: req.body.date,
         userId: user._id
       }).then((created) => {
         res.status(200).send(created);

@@ -33,6 +33,17 @@ const ExpenseForm = ({
         />
       </div>
 
+      <div className="field-line">
+        <TextField
+          floatingLabelText="Date"
+          floatingLabelFixed={true}
+          name="date"
+          type="date"
+          onChange={onChange}
+          value={expense.date}
+        />
+      </div>
+
       <div className="button-line">
         <RaisedButton type="submit" label="Create" primary />
       </div>

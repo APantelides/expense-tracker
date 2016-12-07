@@ -33,7 +33,7 @@ const deleteExpense = (expenseId, callback) => {
 const Expense = ({ expense, index, removeExpense }) => (
   <div className='expense-item'>
     <div>{'Expense Id: ' + expense.id}</div>
-    <div>{'Created: ' + expense.createdAt}</div>
+    <div>{'Date: ' + expense.date.split('T')[0]}</div>
     <div>{'Description: ' + expense.description}</div>
     <div>{'Price: ' + currencySymbols[expense.currency] + Number(expense.price).toFixed(2)}</div>
     <div>

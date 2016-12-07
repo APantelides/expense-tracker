@@ -18,6 +18,10 @@ module.exports = (db, Sequelize) => {
     description: {
       type: Sequelize.STRING,
       allowNull: false
+    },
+    date: {
+      type: Sequelize.DATE,
+      allowNull: false
     }
   }, {
     freezeTableName: true, //make it so that sequelize doesn't modify table name
