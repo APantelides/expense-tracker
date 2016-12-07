@@ -3,6 +3,7 @@ Description: A simple expense tracking application.
 
 ## Table of Contents
 - [Usage](#usage)
+- [Testing](#testing)
 - [Stack](#stack)
 - [Databse](#database)
 - [Routes](#routes)
@@ -23,7 +24,13 @@ Description: A simple expense tracking application.
 4. run npm deploy
 5. navigate to localhost:3000
 
+To make a user an admin enter the postgres terminal, select the appropriate database and run the following command: - `UPDATE users SET "isAdmin"=true WHERE _id= userid;`
+
 Optional: To persist database data on restart you will have to comment line 11 in `server/database/db-config.js` and restart the server
+
+## Testing
+Execute: npm test
+Note: Left testing for last as it is my weakest area. Got blocked and ran out of time. If I had more time I would have spend 15 more minutes troubleshooting and then emailed for help. I need to bush up on the implementation.
 
 ## Stack
   - Backend: Postgres + Node&Express with sequelize(ORM)

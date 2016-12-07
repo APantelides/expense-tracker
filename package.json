@@ -4,6 +4,7 @@
   "description": "An expense tracker practical project for Gigster",
   "main": "client/src/index.js",
   "scripts": {
+    "test": "mocha --recursive spec/Server/",
     "build": "webpack -p --config webpack.build.config.js",
     "start": "webpack-dev-server --progress --inline --hot --history-api-fallback --content-base client/public/build",
     "server": "nodemon server/server.js",
@@ -53,6 +54,7 @@
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.6",
     "style-loader": "^0.13.1",
+    "supertest": "^2.0.1",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   }
