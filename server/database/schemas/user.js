@@ -20,7 +20,7 @@ module.exports = (db, Sequelize) => {
     isAdmin: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
-      defaultValue: true
+      defaultValue: false
     }
   }, {
     freezeTableName: true, //make it so that sequelize doesn't modify table name

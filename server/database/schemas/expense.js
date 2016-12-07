@@ -1,1 +1,3 @@
-//expenses schema goes here
+module.exports = (db, Sequelize) => {
+
+};

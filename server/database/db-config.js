@@ -9,9 +9,9 @@ db.sync({force: true});
 
 //build the tables
 const {user} = require('./schemas/user.js')(db, Sequelize);
-const {expense} = require('./schemas/expense.js')(db, Sequelize);
+//const {expense} = require('./schemas/expense.js')(db, Sequelize);
 
 //define relationships here if needed
 
 
-module.exports = {db, user, expense};
+module.exports = {db, user, /* expense */ };
