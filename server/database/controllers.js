@@ -3,21 +3,17 @@ const {User, db, Sequelize, Expense} = require('./db-config.js');
 module.exports = {
   readExpenses: (req, res) => {
     User.findOne({where: {_id: req.params.userId}}).then((user) => {
-      Expense.find({where: {userId: user._id}}).then((expenses) => {
-        console.log(expenses);
+      Expense.findAll({where: {userId: user._id}}).then((expenses) => {
         res.status(200).send(expenses);
       }).catch((err) => {
-        console.log(err);
         res.status(404).send(err);
       });
     }); 
   },
   readExpense: (req, res) => {
     Expense.findOne({where: {id: req.params.id}}).then((expense)=> {
-      console.log(expense);
       res.status(200).send(expense);
     }).catch((err) => {
-      console.log(err);
       res.status(404).send(err);
     });
   },
@@ -32,7 +28,6 @@ module.exports = {
       });
     }).catch((err) => {
       res.status(404).send(err);
-      console.log(err);
     });
   },
   updateExpense: (req, res) => {
@@ -45,7 +40,6 @@ module.exports = {
       });
     }).catch((err) => {
       res.status(404).send(err);
-      console.log(err);
     });
   },
   deleteExpense: (req, res) => {
@@ -53,7 +47,6 @@ module.exports = {
       res.sendStatus(200);
     }).catch((err) => {
       res.status(404).send(err);
-      console.log(err);
     });
   }
 };
