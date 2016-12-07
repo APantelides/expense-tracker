@@ -6,7 +6,7 @@ Description: A simple expense tracking application.
 - [Stack](#stack)
 - [Databse](#database)
 - [Routes](#routes)
-- [RoadMap](#roadMap)
+- [RoadMap](#roadmap)
 
 ## Usage
 
@@ -57,16 +57,16 @@ DB:
 ## Routes
 
 ### Backend Routes
-  - get '/api/dashboard'
-  - get '/api/expenses/:userId'
-  - get '/api/expense/:id'
-  - post '/api/expense'
-  - put '/api/expense'
-  - delete '/api/expense/:id'
-  - get '/api/report'
-  - get '/api/isUserAdmin/:userId' (deprecated)
-  - get '/api/adminRead'
-  
+  - get `'/api/dashboard'`
+  - get `'/api/expenses/:userId'`
+  - get `/api/expense/:id'`
+  - post `'/api/expense'`
+  - put `'/api/expense'`
+  - delete '/api/expense/:id'`
+  - get `'/api/report'`
+  - get `'/api/isUserAdmin/:userId'` (deprecated)
+  - get `'/api/adminRead'`
+
 ### React Routes
   - `/`: Home Page (not logged in), Dashboard (logged in)
   - `/login`: Login Page
