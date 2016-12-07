@@ -4,7 +4,7 @@ import { Card, CardTitle } from 'material-ui/Card';
 
 const HomePage = () => (
   <Card className="container">
-    <CardTitle title="Expense Tracker" subtitle="Welcome to expense tracker!" />
+    <CardTitle title="Welcome to expense tracker" subtitle="Please sign up or log in!" />
   </Card>
 );
 

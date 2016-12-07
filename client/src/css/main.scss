@@ -48,6 +48,28 @@ a:hover {
   width: 700px;
 }
 
+.expense-container {
+  margin: 0 auto;
+  text-align: center;
+  width: 90%;
+}
+
+.expense-list {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.expense-item {
+  border-color: #00bcd4;
+  border-style: double;
+  border-width: 5px;
+  text-align: center;
+  padding: 10px;
+}
+
 .card-heading {
   padding: 16px;
 }

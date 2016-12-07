@@ -43,8 +43,13 @@ module.exports = {
     });
   },
   deleteExpense: (req, res) => {
-    Expense.destroy({where: {id: req.body.id}}).then((deleted) => {
-      res.sendStatus(200);
+    Expense.findOne({where: {id: req.params.id}}).then((expense) => {
+      if (parseInt(req.body.userId) === expense.userId) {
+        expense.destroy({});
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
     }).catch((err) => {
       res.status(404).send(err);
     });
