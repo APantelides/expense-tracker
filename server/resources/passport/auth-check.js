@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
-const {user} = require('../../database/db-config.js');
+const {User} = require('../../database/db-config.js');
 const config = require('../config/keys.js').jwtSecret;
 
 
 module.exports = (req, res, next) => {
+  console.log(req.headers.authorization);
   if (!req.headers.authorization) {
     return res.status(401).end();
   }
@@ -19,12 +20,11 @@ module.exports = (req, res, next) => {
     let userId = decoded.sub;
 
     // check if a user exists
-    user.find({where: {_id: userId } }).then((user) => {
+    User.find({where: {_id: userId } }).then((user) => {
       if (!user) {
         return res.status(401).end();
       }
-      
-      return next();
+      return next(null);
 
     }).catch((err) => {
       if (err) {

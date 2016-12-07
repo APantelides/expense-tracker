@@ -8,10 +8,10 @@ var db = new Sequelize(dbInfo);
 //db.sync({force: true});
 
 //build the tables
-const {user} = require('./schemas/user.js')(db, Sequelize);
-//const {expense} = require('./schemas/expense.js')(db, Sequelize);
+const {User} = require('./schemas/user.js')(db, Sequelize);
+const {Expense} = require('./schemas/expense.js')(db, Sequelize);
 
-//define relationships here if needed
+//user to expenses one to many -- defines accessors getExpenses & setExpenses
+User.hasMany(Expense, {as: 'Expenses'});
 
-
-module.exports = {db, user, /* expense */ };
+module.exports = {db, User, Expense};

@@ -3,8 +3,10 @@ class Auth {
   
   // Authenticate a user. Save a token string in Local Storage
    
-  static authenticateUser(token) {
+  static authenticateUser(token, user) {
     localStorage.setItem('token', token);
+    localStorage.setItem('userId', user.userId);
+    localStorage.setItem('userName', user.userName);
   }
 
 

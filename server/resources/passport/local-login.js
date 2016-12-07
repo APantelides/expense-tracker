@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {user} = require('../../database/db-config.js');
+const {User} = require('../../database/db-config.js');
 const PassportLocalStrategy = require('passport-local').Strategy;
 const config = require('../config/keys.js').jwtSecret;
 
@@ -16,9 +16,8 @@ module.exports = new PassportLocalStrategy({
   };
 
   // find a user by email address
-  user.findOne({where: {email: userData.email}}).then((user) => {
+  User.findOne({where: {email: userData.email}}).then((user) => {
     
-    console.log(user);
     if (!user) {
       const error = new Error('Incorrect email');
       error.name = 'IncorrectCredentialsError';
@@ -45,7 +44,8 @@ module.exports = new PassportLocalStrategy({
       const token = jwt.sign(payload, config);
 
       const userData = {
-        userName: user.userName
+        userName: user.userName,
+        userId: user._id
       };
       return done(null, token, userData);
     });

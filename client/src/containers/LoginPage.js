@@ -45,7 +45,8 @@ class LoginPage extends React.Component {
       headers: new Headers({
         'Content-type': 'application/x-www-form-urlencoded'
       }),
-      body: formData
+      body: formData,
+      credentials: 'include'
     }).then((res) => {
       if (res.status === 200) {
         res.json().then((json) => {
@@ -54,8 +55,7 @@ class LoginPage extends React.Component {
             errors: {}
           });
 
-          Auth.authenticateUser(json.token);
-
+          Auth.authenticateUser(json.token, json.user);
           this.context.router.replace('/');
         });
       } else {

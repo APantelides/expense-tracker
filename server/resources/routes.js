@@ -5,7 +5,7 @@ const validator = require('validator');
 
 module.exports = (app, express) => {
 
-//authentication routes
+//**** Authentication routes ****
   app.post('/auth/signup', (req, res, next) => {
     const validationResult = validateSignupForm(req.body);
     if (!validationResult.success) {
@@ -81,12 +81,36 @@ module.exports = (app, express) => {
     })(req, res, next);
   });
 
+  //***** API Routes *****
 
-  app.get('/api/dashboard', (req, res, next) => {
-    return res.status(200).json({ message: 'You\'re authorized to see this secret message.'});
+
+  app.get('/api/dashboard', (req, res) => {
+
+    res.status(200).json({ message: 'Welcome!'});
+  });
+
+  app.get('/api/expenses/:userId', (req, res) => {
+    controller.readExpenses(req, res);
+  });
+
+  app.get('/api/expense/:id', (req, res) => {
+    controller.readExpense(req, res);
+  });
+
+  app.post('/api/expense', (req, res) => {
+    controller.createExpense(req, res);
+  });
+
+  app.put('/api/expense/:id', (req, res) => {
+    controller.updateExpense(req, res);
+  });
+
+  app.delete('/api/expense/:id', (req, res) => {
+    controller.deleteExpense(req, res);
   });
 
 
+///****** Static Files & react-router pass through *******
   app.use(express.static(path.join(__dirname, '../../client/public')));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../../client/public', 'index.html'));
