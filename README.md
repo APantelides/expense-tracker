@@ -57,15 +57,15 @@ DB:
 ## Routes
 
 ### Backend Routes
-  - get `'/api/dashboard'`
-  - get `'/api/expenses/:userId'`
-  - get `/api/expense/:id'`
-  - post `'/api/expense'`
-  - put `'/api/expense'`
-  - delete '/api/expense/:id'`
-  - get `'/api/report'`
-  - get `'/api/isUserAdmin/:userId'` (deprecated)
-  - get `'/api/adminRead'`
+  - `get` `'/api/dashboard'`
+  - `get` `'/api/expenses/:userId'`
+  - `get` `/api/expense/:id'`
+  - `get` `'/api/report'`
+  - `get` `'/api/isUserAdmin/:userId'` (deprecated)
+  - `get` `'/api/adminRead'`
+  - `post` `'/api/expense'`
+  - `put` `'/api/expense'`
+  - `delete` `'/api/expense/:id'`
 
 ### React Routes
   - `/`: Home Page (not logged in), Dashboard (logged in)
