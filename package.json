@@ -4,8 +4,10 @@
   "description": "An expense tracker practical project for Gigster",
   "main": "client/src/index.js",
   "scripts": {
-    "build": "webpack -p --config webpack.build.config.js",
-    "start": "webpack-dev-server --progress --inline --hot --history-api-fallback --content-base client/public/build"
+    "build": "webpack -p  --watch --config webpack.build.config.js",
+    "start": "webpack-dev-server --progress --inline --hot --history-api-fallback --content-base client/public/build",
+    "server": "nodemon server/server.js",
+    "deploy": "npm run build && node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
     "bcrypt": "^1.0.0",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.2.0",
+    "material-ui": "^0.16.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.1.0",
@@ -28,7 +31,9 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^3.0.0",
-    "sequelize": "^3.27.0"
+    "react-tap-event-plugin": "^2.0.1",
+    "sequelize": "^3.27.0",
+    "validator": "^6.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",

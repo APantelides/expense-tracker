@@ -1,35 +1,35 @@
 const jwt = require('jsonwebtoken');
 const {user} = require('../../database/db-config.js');
+const config = require('../config/keys.js').jwtSecret;
 
 
-module.exports = function(config) {
+module.exports = (req, res, next) => {
+  if (!req.headers.authorization) {
+    return res.status(401).end();
+  }
 
-  return (req, res, next) => {
-    if (!req.headers.authorization) {
-      return res.status(401).end();
-    }
+  // get the last part from a authorization header string like "bearer token-value"
+  let token = req.headers.authorization.split(' ')[1];
 
-    // get the last part from a authorization header string like "bearer token-value"
-    let token = req.headers.authorization.split(' ')[1];
+  // decode the token using a secret key-phrase
+  jwt.verify(token, config, (err, decoded) => {
+    // the 401 code is for unauthorized status
+    if (err) { return res.status(401).end(); }
 
-    // decode the token using a secret key-phrase
-    jwt.verify(token, config.jwtSecret, (err, decoded) => {
-      // the 401 code is for unauthorized status
-      if (err) { return res.status(401).end(); }
+    let userId = decoded.sub;
 
-      let userId = decoded.sub;
+    // check if a user exists
+    user.find({where: {_id: userId } }).then((user) => {
+      if (!user) {
+        return res.status(401).end();
+      }
+      
+      return next();
 
-      // check if a user exists
-      user.find({where: {id: userId } }).then((err, user) => {
-        if (err || !user) {
-          return res.status(401).end();
-        }
-
-        return next();
-
-      });
+    }).catch((err) => {
+      if (err) {
+        return res.status(401).end();
+      }
     });
-
-  };
-
+  });
 };

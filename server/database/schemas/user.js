@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
 module.exports = (db, Sequelize) => {
   const user = db.define('users', {
-    id: {
+    _id: {
       type: Sequelize.INTEGER,
+      allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
@@ -25,12 +26,12 @@ module.exports = (db, Sequelize) => {
   }, {
     freezeTableName: true, //make it so that sequelize doesn't modify table name
     instanceMethods: { //define method for comparing a password
-      comparePassword: (password, callback) => {
-        return bcrypt.compare(password, this.password, callback);
+      comparePassword: (password, userPassword, callback) => {
+        return bcrypt.compare(password, userPassword, callback);
       }
     },
     hooks: {
-      beforeSave: (user, next) => {
+      beforeCreate: (user, fields, next) => {
         if (!user.changed('password')) {
           return next();
         }
@@ -45,12 +46,9 @@ module.exports = (db, Sequelize) => {
             }
             //replace password string with hash
             user.password = hash;
-
             return next();
           });
         });
-        user.password = user.generateHash(user.password);
-        return next();
       }
     }
   }

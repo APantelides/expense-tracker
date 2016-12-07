@@ -1,4 +1,3 @@
-const config = require('./config/keys.js').jwtSecret;
 const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
@@ -12,7 +11,13 @@ module.exports = (app, express) => {
   //passport middleware
   app.use(passport.initialize());
 
+  const localSignupStrategy = require ('./passport/local-signup');
+  const localLoginStrategy = require('./passport/local-login');
+
+  passport.use('local-signup', localSignupStrategy);
+  passport.use('local-login', localLoginStrategy);
+
   //check auth to be able to use api
-  const authCheckMiddleware = require('./passport/auth-check.js')(config);
+  const authCheckMiddleware = require('./passport/auth-check.js');
   app.use('/api', authCheckMiddleware);
 };

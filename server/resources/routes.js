@@ -7,50 +7,83 @@ module.exports = (app, express) => {
 
 //authentication routes
   app.post('/auth/signup', (req, res, next) => {
-    let validationResult = validateSignupForm(req.body);
+    const validationResult = validateSignupForm(req.body);
     if (!validationResult.success) {
-      return res.status(400).json({success: false, message: validationResult.message, errors: validationResult.errors });
+      return res.status(400).json({
+        success: false, 
+        message: validationResult.message, 
+        errors: validationResult.errors 
+      });
     }
 
-    passport.authenticate('local-signup', (err, info) => {
-      if (err) {
-        if (err.code === 23505) {
-          console.log('error signing up ->', err, err.name, err.code, '<- error signing up');
-          // 23505 is duplicate of unique email error
-          return res.status(409).json({success: false, message: 'Check the form for errors.', errors: { email: 'This email is already taken.' }});
+    return passport.authenticate('local-signup', (user) => {
+      if (user.errors) {
+        const err = user.errors[0];
+        if (err.path === 'email') {
+          
+          return res.status(409).json({
+            success: false, 
+            message: 'Email already in use!', 
+            errors: { email: 'This email is already taken.' 
+          }});
+        }
+        if (err.path === 'userName') {
+          return res.status(409).json({
+            success: false, 
+            message: 'User name already in use!', 
+            errors: { userName: 'This user name is already taken.' 
+          }});
         }
 
-        return res.status(400).json({ success: false, message: 'Could not process the form.' });
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Could not process the form.' 
+        });
       }
-
-      return res.status(200).json({ success: true, message: 'You have successfully signed up! Now you should be able to log in.' });
+      return res.status(200).json({ 
+        success: true, 
+        message: 'You have successfully signed up! Now you should be able to log in.' 
+      });
     })(req, res, next);
-
   });
 
   app.post('/auth/login', (req, res, next) => {
-    let validationResult = validateLoginForm(req.body);
+    const validationResult = validateLoginForm(req.body);
     if (!validationResult.success) {
-      return res.status(400).json({ success: false, message: validationResult.message, errors: validationResult.errors });
+      return res.status(400).json({ 
+        success: false, 
+        message: validationResult.message, 
+        errors: validationResult.errors 
+      });
     }
 
-    passport.authenticate('local-login', (err, token, userData) => {
+    return passport.authenticate('local-login', (err, token, userData) => {
       if (err) {
         if (err.name === 'IncorrectCredentialsError') {
-          return res.status(400).json({ success: false, message: err.message });
+          return res.status(400).json({ 
+            success: false, 
+            message: err.message 
+          });
         }
 
-        return res.status(400).json({ success: false, message: 'Could not process the form.' });
+        return res.status(400).json({ 
+          success: false, 
+          message: 'Could not process the form.' 
+        });
       }
 
-      return res.json({ success: true, message: 'You have successfully logged in!', token: token, user: userData });
-
+      return res.json({ 
+        success: true, 
+        message: 'You have successfully logged in!', 
+        token: token, 
+        user: userData 
+      });
     })(req, res, next);
   });
 
 
-  app.get('/api', (req, res) => {
-
+  app.get('/api/dashboard', (req, res, next) => {
+    return res.status(200).json({ message: 'You\'re authorized to see this secret message.'});
   });
 
 
@@ -64,23 +97,23 @@ module.exports = (app, express) => {
 
 //validate Signup form
 var validateSignupForm = (payload) => {
+  const errors = {};
   let isFormValid = true;
-  let errors = {};
   let message = '';
 
-  if (!payload.email || !validator.isEmail(payload.email)) {
+  if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
     isFormValid = false;
     errors.email = 'Please provide a correct email address.';
   }
 
-  if (!payload.password || !validator.isLength(payload.password, 8)) {
+  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {
     isFormValid = false;
     errors.password = 'Password must have at least 8 characters.';
   }
 
-  if (!payload.userName || payload.userName.trim().length === 0) {
+  if (!payload || typeof payload.userName !== 'string' || payload.userName.trim().length === 0) {
     isFormValid = false;
-    errors.userName = 'Please provide your user name.';
+    errors.userName = 'Please provide your name.';
   }
 
   if (!isFormValid) {
@@ -89,17 +122,17 @@ var validateSignupForm = (payload) => {
 
   return {
     success: isFormValid,
-    message: message,
-    errors: errors
+    message,
+    errors
   };
 };
 
 
 //validate Login form
 var validateLoginForm = (payload) => {
-  let isFormValid = true;
-  let errors = {};
-  let message = '';
+  const isFormValid = true;
+  const errors = {};
+  const message = '';
 
   if (!payload.email || payload.email.trim().length === 0) {
     isFormValid = false;
