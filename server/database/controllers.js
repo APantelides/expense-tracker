@@ -60,5 +60,22 @@ module.exports = {
     }).catch((err) => {
       res.status(404).send(err);
     });
+  },
+  generateReport: (req, res) => {
+    Expense.findAll({
+      where: {
+        userId: req.query.userId, 
+        date: {
+          $and: {
+            $gte: req.query.startDate,
+            $lte: req.query.endDate
+          }
+        }
+      }
+    }).then((expenses) => {
+      res.status(200).send(expenses);
+    }).catch((err) => {
+      res.status(404).send(err);
+    });
   }
 };

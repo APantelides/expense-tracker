@@ -5,7 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { browserHistory, Router } from 'react-router';
 import routes from './router.js';
-
+import './css/main.scss';
 // remove tap delay, essential for MaterialUI to work properly
 injectTapEventPlugin();
 

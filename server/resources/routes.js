@@ -109,6 +109,10 @@ module.exports = (app, express) => {
     controller.deleteExpense(req, res);
   });
 
+  app.get('/api/report', (req, res) => {
+    controller.generateReport(req, res);
+  });
+
 
 ///****** Static Files & react-router pass through *******
   app.use(express.static(path.join(__dirname, '../../client/public')));

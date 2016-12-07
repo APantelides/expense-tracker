@@ -5,8 +5,9 @@ import LoginPage from './containers/LoginPage.js';
 import SignUpPage from './containers/SignUpPage.js';
 import CreateExpensePage from './containers/CreateExpensePage.js';
 import EditExpensePage from './containers/EditExpensePage.js';
+import ReportPage from './containers/ReportPage.js';
 import Auth from './modules/Auth';
-import './css/main.scss';
+
 
 
 const routes = {
@@ -41,6 +42,17 @@ const routes = {
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
           callback(null, EditExpensePage);
+        } else {
+          callback(null, HomePage);
+        }
+      }
+    },
+
+    {
+      path: '/report',
+      getComponent: (location, callback) => {
+        if (Auth.isUserAuthenticated()) {
+          callback(null, ReportPage);
         } else {
           callback(null, HomePage);
         }
