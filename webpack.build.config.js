@@ -24,15 +24,15 @@ var config = {
       test: /\.scss$/,
       loaders: ['style', 'css', 'sass']
     }]
-  },
-  plugins: [
-    new Webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new Webpack.optimize.UglifyJsPlugin()
-  ]
+  }
+  // plugins: [
+  //   new Webpack.DefinePlugin({
+  //     'process.env': {
+  //       NODE_ENV: JSON.stringify('production')
+  //     }
+  //   }),
+  //   new Webpack.optimize.UglifyJsPlugin()
+  // ]
 };
 
 module.exports = config;
