@@ -4,7 +4,7 @@
   "description": "An expense tracker practical project for Gigster",
   "main": "client/src/index.js",
   "scripts": {
-    "build": "webpack --watch --config webpack.build.config.js",
+    "build": "webpack -p --config webpack.build.config.js",
     "start": "webpack-dev-server --progress --inline --hot --history-api-fallback --content-base client/public/build",
     "server": "nodemon server/server.js",
     "deploy": "npm run build && node server/server.js"

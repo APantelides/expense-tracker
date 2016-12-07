@@ -6,8 +6,9 @@ var db = new Sequelize(dbInfo, {
   logging: false
 });
 
-//overwrite existing database... remove once we are going to start testing front end!
-//db.sync({force: true});
+
+//OVERWRITE EXISTING DATABSE
+db.sync({force: true});
 
 //build the tables
 const {User} = require('./schemas/user.js')(db, Sequelize);

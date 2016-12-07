@@ -1,34 +1,73 @@
 # expense-tracker
-Description: To be filled out..
+Description: A simple expense tracking application.
 
-Install / Run instrcutions: To be filled up...
+## Table of Contents
+- [Usage](#Usage)
+- [Databse](#Database)
+- [Stack](#Stack)
+- [RoadMap](#RoadMap)
+- [Routes](#Routes)
 
-Plan v0.0.1:
-  Stack:
-    - Backend: Postgres + Node&Express with sequelize(ORM)
-    - Auth: Oauth 2.0 Local or crypto + jwt
-    - Front-End/UI: React + React-Router and maybe Redux (if needed) with React Bootstrap & SASS for styling
-    - Unit Testing: Mocha + Chai (+ Sinon if needed)
-    
-  If time allows:
-    - Deploy on AWS EC2(simple) or use Docker & Haproxy to create a scalable environment hosted on AWS ECS (preferred)
-    - Support Euros, Yuan, Yen, CAD, Pesos, Ruble, AUD and be able to convert to and from using real time exchange rates (upadting every hour).
-    - Users can change the report to aggregate spending per hour, day,month, and year (in addition to per week)
-    
-  DB:
-    - Tables: Users, Expenses, Reports (if we want to save all generated reports to eliminate duplicate queries)
+## Usage
+
+1. npm install
+2. Install Postgres on your computer
+  2.1 Set up role for server
+    - Enter Postgres terminal and run the following commands:
+      - `CREATE USER ubuntu WITH PASSWORD 'password';`
+      - `ALTER USER ubuntu WITH SUPERUSER;`
+  2.1 Create database with appropriate user and role
+    - Enter Postgres terminal and run the following commands:
+      - `CREATE DATABASE expensetracker;`
+  2.2 Create key.js file in `server/resources/config` using properly filled out `keys.example.js` from above info
+3. run npm deploy
+4. navigate to localhost:3000
+
+Optional: To persist database data on restart you will have to comment line 11 in `server/database/db-config.js` and restart the server
+
+## Database
+
+DB:
+    - Tables: Users, Expenses
     - Relationships: Users to Expenses (One to Many)
     
-    User Columns:
-      - ID(primary key): Integer Auto Increment
-      - Username: String (15 chars)
-      - Email: String (256 chars)
-      - Password: String (12 chars)
-      - IsAdmin: Boolean
+    Table Name: users
+    Columns:
+      - _id(primary key): Integer Auto Increment
+      - userName: String
+      - email: String
+      - password: String
+      - isAdmin: Boolean
     
-    Expense Columns:
-      - ID(primary key): Integer Auto Increment
-      - Owner ID(User ID foreign key): Integer
+    Table Name: expenses
+    Columns:
+      - id(primary key): Integer Auto Increment
+      - userId(User ID foreign key): Integer
       - Currency: String Default USD
-      - Price: Decimal (dollars) or Int (cents)
-      - Description: String(256 chars)
+      - Price: Decimal (dollars)
+      - Description: String
+      - Date: Date
+
+## Stack
+  - Backend: Postgres + Node&Express with sequelize(ORM)
+  - Auth: Oauth 2.0 Local or bcrypt + jwt + passport (local strategy)
+  - Front-End/UI: React + React-Router Material-UI & SASS for styling
+  - Unit Testing: Mocha + Chai (+ Sinon if needed)
+  
+## RoadMap
+  - Finish writing tests for full coverage of current implementation 
+  - Deploy on AWS EC2(simple) or use Docker & Haproxy to create a scalable environment hosted on AWS ECS (preferred)
+  - Support Euros, Yuan, Yen, CAD, Pesos, Ruble, AUD and be able to convert to and from using real time exchange rates (upadting every hour).
+  - Users can change the report to aggregate spending per hour, day,month, and year (in addition to per week)
+
+## Routes
+
+- get '/api/dashboard'
+- get '/api/expenses/:userId'
+- get '/api/expense/:id'
+- post '/api/expense'
+- put '/api/expense'
+- delete '/api/expense/:id'
+- get '/api/report'
+- get '/api/isUserAdmin/:userId' (not used)
+- get '/api/adminRead'
