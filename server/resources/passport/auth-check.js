@@ -4,7 +4,6 @@ const config = require('../config/keys.js').jwtSecret;
 
 
 module.exports = (req, res, next) => {
-  console.log(req.headers.authorization);
   if (!req.headers.authorization) {
     return res.status(401).end();
   }
@@ -19,6 +18,7 @@ module.exports = (req, res, next) => {
 
     let userId = decoded.sub;
 
+
     // check if a user exists
     User.find({where: {_id: userId } }).then((user) => {
       if (!user) {
@@ -27,6 +27,7 @@ module.exports = (req, res, next) => {
       return next(null);
 
     }).catch((err) => {
+
       if (err) {
         return res.status(401).end();
       }

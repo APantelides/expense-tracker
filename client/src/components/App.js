@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
-
+import UserId from '../modules/UserId';
 
 const App = ({ children }) => (
   <div>
@@ -12,6 +12,7 @@ const App = ({ children }) => (
 
       {Auth.isUserAuthenticated() ? (
         <div className="top-bar-right">
+          <Link to='/adminDash'>Admin Dashboard</Link>
           <Link to='/report'>Expense Report</Link>
           <Link to='/createExpense'>Create Expense</Link>
           <Link to="/logout">Log out</Link>

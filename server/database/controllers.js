@@ -77,5 +77,34 @@ module.exports = {
     }).catch((err) => {
       res.status(404).send(err);
     });
+  },
+  isUserAdmin: (req, res) => {
+    User.find({
+      where: {
+        _id: req.params.userId
+      }
+    }).then((user) => {
+      if (user.isAdmin === true) {
+        res.status(200).send(true);
+      } else {
+        res.status(200).send(false);
+      }
+    }).catch((err) => {
+      res.status(404).send(err);
+    });
+  },
+  adminRead: (req, res) => {
+    User.findOne({where: {_id: req.query.userId}}).then((user) => {
+      if (user.isAdmin === true) {
+        Expense.findAll({}).then((expenses) => {
+          res.status(200).send(expenses);
+        }).catch((err) => {
+          res.status(404).send(err);
+        });
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    
   }
 };

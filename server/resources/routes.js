@@ -113,6 +113,14 @@ module.exports = (app, express) => {
     controller.generateReport(req, res);
   });
 
+  app.get('/api/isUserAdmin/:userId', (req, res) => {
+    controller.isUserAdmin(req, res);
+  });
+
+  app.get('/api/adminRead', (req, res) => {
+    controller.adminRead(req, res);
+  });
+
 
 ///****** Static Files & react-router pass through *******
   app.use(express.static(path.join(__dirname, '../../client/public')));

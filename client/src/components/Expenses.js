@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react';
 import Expense from './Expense';
+import SimpleExpense from './SimpleExpense';
 
-const Expenses = ({ expenseList, removeExpense }) => (
+const Expenses = ({ expenseList, admin }) => (
   <div className='expense-list'>
   {expenseList.map((expense, index) => {
-    return (
-      <Expense index={index + 1} key={index} expense={expense} removeExpense={removeExpense} />
+    return admin ? (
+      <SimpleExpense key={index} expense={expense} />
+      ) : (
+      <Expense key={index} expense={expense} />
     );
   })}
   </div>

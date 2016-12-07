@@ -2,7 +2,9 @@ var Sequelize = require('sequelize');
 const {dbInfo} = require('../resources/config/keys');
 
 //connect to postgres using Sequelize
-var db = new Sequelize(dbInfo);
+var db = new Sequelize(dbInfo, {
+  logging: false
+});
 
 //overwrite existing database... remove once we are going to start testing front end!
 //db.sync({force: true});

@@ -1,6 +1,7 @@
 import App from './components/App.js';
 import HomePage from './components/HomePage.js';
 import DashboardPage from './containers/DashboardPage.js';
+import AdminDashPage from './containers/AdminDashPage.js';
 import LoginPage from './containers/LoginPage.js';
 import SignUpPage from './containers/SignUpPage.js';
 import CreateExpensePage from './containers/CreateExpensePage.js';
@@ -31,6 +32,17 @@ const routes = {
       getComponent: (location, callback) => {
         if (Auth.isUserAuthenticated()) {
           callback(null, CreateExpensePage);
+        } else {
+          callback(null, HomePage);
+        }
+      }
+    },
+
+    {
+      path: '/adminDash',
+      getComponent: (location, callback) => {
+        if (Auth.isUserAuthenticated()) {
+          callback(null, AdminDashPage);
         } else {
           callback(null, HomePage);
         }
