@@ -31,13 +31,19 @@ module.exports = {
     });
   },
   updateExpense: (req, res) => {
+    console.log(req);
     Expense.findOne({where: {id: req.body.id}}).then((expense) => {
-      expense.update({
-        price: req.body.price,
-        description: req.body.description
-      }).then((updated) => {
-        res.status(200).send(updated);
-      });
+      if (parseInt(req.body.userId) === expense.userId) {
+        expense.update({
+          price: req.body.price,
+          description: req.body.description
+        }).then((updated) => {
+          res.status(200).send(updated);
+        });
+      } else {
+        res.sendStatus(404);
+      }
+      
     }).catch((err) => {
       res.status(404).send(err);
     });

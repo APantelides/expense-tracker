@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import IconButton from 'material-ui/IconButton';
+import { browserHistory } from 'react-router';
 import Update from 'material-ui/svg-icons/action/update';
 import Delete from 'material-ui/svg-icons/action/delete';
 import Auth from '../modules/Auth';
@@ -31,13 +32,13 @@ const deleteExpense = (expenseId, callback) => {
 
 const Expense = ({ expense, index, removeExpense }) => (
   <div className='expense-item'>
-    <div>{index}</div>
+    <div>{'Expense Id: ' + expense.id}</div>
     <div>{'Created: ' + expense.createdAt}</div>
     <div>{'Description: ' + expense.description}</div>
     <div>{'Price: ' + currencySymbols[expense.currency] + Number(expense.price).toFixed(2)}</div>
     <div>
       <IconButton onTouchTap={()=> {
-        console.log(expense.id);
+        browserHistory.push(`/editExpense/${expense.id}`);
       }}>
         <Update hoverColor='#1976d2' />
       </IconButton>

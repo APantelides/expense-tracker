@@ -101,7 +101,7 @@ module.exports = (app, express) => {
     controller.createExpense(req, res);
   });
 
-  app.put('/api/expense/:id', (req, res) => {
+  app.put('/api/expense', (req, res) => {
     controller.updateExpense(req, res);
   });
 

@@ -8,7 +8,7 @@ const Dashboard = ({ expenseList, removeExpense }) => (
   <Card className="expense-container">
     <CardTitle
       title="Expense Dashboard"
-      subtitle="You can see your expense report and edit your expenses from here!"
+      subtitle="You can see and edit your expenses from here!"
     />
     {expenseList.length === 0 && <CardText style={{ fontSize: '16px', color: 'green' }}>{'No expenses to show, please create some!'}</CardText>}
   </Card>
